@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css" />
+    <title>InovaWeb - Soluções com Inteligência Artificial</title>
+</head>
+
+<body>
+
+    <header id="header">
+        <h1>InovaWeb</h1>
+        <h2 class="destaque italico">Solução Web com Inteligência Virtual</h2>
+        <p>Criamos sites modernos, responsivos e inovadores para sua empresa se destacar no mercado digital.</p>
+        
+        <nav aria-label="Navegação principal">
+            <ul>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="sobre.html">Serviços</a></li>
+                <li><a href="sobre.html">Contatos</a></li>
+
+            </ul>
+        </nav>
+        
+        <figure>
+            <img src="./hero_inova_web.png" alt="Banner ilustrativo da InovaWeb com elementos tecnológicos" width="300">
+        </figure>
+    </header>
+
+    <main>
+        <section id="servicos">
+            <h3>Nossos Serviços</h3>
+            <ul>
+                <li>Desenvolvimento de Sites Personalizados</li>
+                <li>Design Responsivo para Dispositivos Móveis</li>
+                <li>Otimização para Motores de Busca (SEO)</li>
+                <li>Integração com Redes Sociais</li>
+                <li>Suporte Técnico e Manutenção Contínua</li>
+            </ul>
+
+            <div class="tabela-precos">
+                <table border="1">
+                    <caption>Tabela Comparativa de Planos e Preços</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Plano</th>
+                            <th scope="col">Preço</th>
+                            <th scope="col">Recursos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Plano Básico</td>
+                            <td>R$ 500,00</td>
+                            <td>Site de até 5 páginas, Design Responsivo, SEO Básico</td>
+                        </tr>
+                        <tr>
+                            <td>Plano Intermediário</td>
+                            <td>R$ 1000,00</td>
+                            <td>Site de até 10 páginas, Design Personalizado, SEO Avançado</td>
+                        </tr>
+                        <tr>
+                            <td>Plano Premium</td>
+                            <td>R$ 2000,00</td>
+                            <td>Site Ilimitado, Design Exclusivo, Suporte Prioritário</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <hr>
+
+        <section id="contato">
+            <h3>Entre em Contato</h3>
+            <form action="enviar_formulario.php" method="post">
+                <fieldset>
+                    <legend>Envie sua mensagem</legend>
+                    
+                    <label for="nome">Nome:</label><br>
+                    <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required><br><br>
+
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" placeholder="email@exemplo.com" required><br><br>
+
+                    <label for="mensagem">Mensagem:</label><br>
+                    <textarea id="mensagem" name="mensagem" rows="4" cols="50" required></textarea><br><br>
+
+                    <button type="submit">Enviar Mensagem</button>
+                </fieldset>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 InovaWeb. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>
