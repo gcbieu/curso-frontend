@@ -1,0 +1,120 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    color: #2e2e2e;
+    line-height: 1.6;
+    padding: 40px;
+    background: #f8f9fa;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #0066cc;
+    margin-bottom: 8px;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #003366;
+    margin: 40px 0 16px;
+    border-left: 4px solid #0066cc;
+    padding-left: 12px;
+}
+
+h3 {
+    font-size: 1rem;
+    color: #0066cc;
+    margin: 24px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+p {
+    margin-bottom: 12px;
+    max-width: 700px;
+}
+
+/* Caixa de exemplo visual */
+.exemplo {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 16px 0 32px;
+}
+
+/* Caixas coloridas para demonstração */
+.caixa-b {
+    background: #6c63ff;
+}
+
+.caixa-c {
+    background: #00b4d8;
+}
+
+/* Separador de seção */
+section {
+    border-bottom: 2px solid #dee2e6;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.caixatittle {
+    background: blue;
+    float: left;
+    color: rgb(255, 255, 255);
+    padding: 10px 10px 10px 10px;
+    font-weight: semi-bold;
+    border-radius: 30px;
+}
+
+.caixa {
+    background: rgb(0, 0, 0);
+    float: left;
+    color: rgb(255, 255, 255);
+    margin: 8px;
+    padding: 10px 10px 10px 10px;
+    font-weight: semi-bold;
+    border-radius: 30px;
+}
+
+.caixa:hover {
+    background: rgb(129, 15, 223);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    transition: 0.3s ease;
+    position: relative;
+    top: -10px;
+
+}
+
+.caixarigth {
+    background: rgb(0, 0, 0);
+    float: right;
+    color: rgb(255, 255, 255);
+    margin: 8px;
+    padding: 10px 10px 10px 10px;
+    font-weight: semi-bold;
+    border-radius: 30px;
+}
+
+.caixarigth:hover {
+    background: rgb(129, 15, 223);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    transition: 0.3s ease;
+    position: relative;
+    top: -10px;
+}

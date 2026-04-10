@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="css.webp" type="image/x-icon">
+    <title>Guia CSS: Float e Position</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="caixatittle" style="position:fixed">💻Guia CSS: Float e Position</h1>
+    <br><br><br><br>
+    <p>Construído em aula — <span style="color: green">seu guia de referência pessoal.</span></p>
+
+    <h2>Float</h2>
+
+    <p>O <code>&lt;float&gt;</code> é uma propriedade CSS que permite que um elemento seja posicionado à esquerda ou à
+        direita
+        dentro de seu contêiner, permitindo que o conteúdo flua ao redor dele. Ele é comumente usado para criar layouts
+        de texto e imagens.</p>
+
+    <div class="clearfix" style="border: 2px solid rgb(99, 92, 92)">
+        <h3>SEM FLOAT</h3>
+        <div>Exemplo 1</div>
+        <div>Exemplo 2</div>
+        <div>Exemplo 3</div>
+    </div>
+
+    <br>
+
+    <div class="clearfix" style="border: 2px solid rgb(99, 92, 92)">
+        <h3>FLOAT</h3>
+        <div class="caixa">Exemplo 1</div>
+        <div class="caixa">Exemplo 2</div>
+        <div class="caixa">Exemplo 3</div>
+    </div>
+
+    <br>
+
+    <div class="clearfix" style="border: 2px solid rgb(99, 92, 92)">
+        <h3>Float Rigth</h3>
+        <div class="caixarigth">Exemplo 3</div>
+        <div class="caixarigth">Exemplo 2</div>
+        <div class="caixarigth">Exemplo 1</div>
+    </div>
+
+    <br>
+
+    <h2>Position</h2>
+    <h3>Position relative</h3>
+    <div class="clearfix" style="border: 2px solid rgb(99, 92, 92)">
+        <div class="caixa" style="position: relative; top: 30px">Exemplo 1</div>
+        <div class="caixa">Exemplo 2</div>
+        <div class="caixa" style="position: relative; top: 30px">Exemplo 3</div>
+    </div>
+
+    <br>
+
+    <h3>Position Absoluto</h3>
+    <div class="clearfix" style="border: 2px solid rgb(99, 92, 92); position: relative;">
+        <div class="caixa" style="position: absolute; top: -30px; right: -10px">Exemplo 1</div>
+        <div class="caixa">Exemplo 2</div>
+        <div class="caixa" style="position: relative; top: 30px">Exemplo 3</div>
+    </div>
+
+    <br>
+
+    <h3>Position Fixed</h3>
+    <p> Title fixed &lt;💻Guia CSS: Float e Position&gt;</p>
+
+    <br>
+
+    <h3>Position Sticky</h3>
+    <p>Hibrido entre relative e fixed.</p>
+
+    <!--POSITION: STICKY-->
+
+    <div class="exemplo">
+        <p style="margin-bottom: 12px">
+            📌 Cabeçalho Sticky
+        </p>
+        <div style="
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+          ">
+            <div style="
+        position: sticky;
+        top: 0;
+        background-color: 0066cc;
+        color: white;
+        padding: 10px 16px;
+        font-weight: bold;">
+        </div>
+            <div style="padding: 16px">
+                <p>Linha de conteúdo 1</p>
+                <p>Linha de conteúdo 2</p>
+                <p>Linha de conteúdo 3</p>
+                <p>Linha de conteúdo 4</p>
+                <p>Linha de conteúdo 5</p>
+                <p>Linha de conteúdo 6</p>
+                <p>Linha de conteúdo 7</p>
+                <p>Linha de conteúdo 8</p>
+
+            </div>
+        </div>
+        <p style="margin-top: 8px; font-style: italic; color: #636e72">
+            Usos comuns: cabeçalho de tabela, menu lateral, barra de progresso de
+            leitura.
+        </p>
+    </div>
+
+
+</body>
+
+</html>
