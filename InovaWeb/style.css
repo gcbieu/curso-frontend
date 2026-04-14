@@ -1,0 +1,86 @@
+:root {
+    --primary-metallic: #e0e0e0;
+    --accent-glow: #00d4ff;
+    --dark-bg: #0a0a0a;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--dark-bg);
+    color: #ffffff;
+    scroll-behavior: smooth;
+}
+
+/* Estética Metálica VNew */
+.navbar-brand {
+    font-weight: 900;
+    letter-spacing: -2px;
+    background: linear-gradient(180deg, #fff 0%, #888 50%, #eee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.8rem;
+}
+
+.glass-nav {
+    background: rgba(10, 10, 10, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Section Customizada */
+.hero-section {
+    padding: 160px 0 100px;
+    background: radial-gradient(circle at top right, rgba(0, 212, 255, 0.1), transparent);
+}
+
+.display-hero {
+    font-weight: 900;
+    letter-spacing: -3px;
+    line-height: 0.9;
+    text-transform: uppercase;
+}
+
+/* Cards Estilo Premium */
+.custom-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.custom-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent-glow);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.1);
+}
+
+.btn-glow {
+    background: white;
+    color: black;
+    font-weight: 700;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 0;
+    transition: 0.3s;
+}
+
+.btn-glow:hover {
+    background: var(--accent-glow);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.section-title {
+    font-weight: 800;
+    letter-spacing: 2px;
+    opacity: 0.9;
+}
+
+footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Utilitários */
+.text-gradient {
+    background: linear-gradient(45deg, #fff, #666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
