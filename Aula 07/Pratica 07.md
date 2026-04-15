@@ -36,7 +36,7 @@ Sua página deve ter exatamente estas seções, nesta ordem:
 
 ### **Desafio 1: Configuração inicial**
 
-- [ ] Crie o arquivo `inovaweb-bootstrap.html`  
+- [✅] Crie o arquivo `inovaweb-bootstrap.html`  
 - [ ] Inclua o CSS do Bootstrap 5 no `<head>` via CDN  
 - [ ] Inclua o JS do Bootstrap antes do `</body>` via CDN  
 - [ ] Abra no Live Server e confirme que o Bootstrap carregou  
@@ -50,11 +50,11 @@ Sua página deve ter exatamente estas seções, nesta ordem:
 
 Crie uma navbar que:
 
-- [ ] Tenha o nome **InovaWeb** como marca (navbar-brand)  
-- [ ] Tenha fundo azul escuro (`bg-primary` ou `bg-dark`)  
-- [ ] Tenha 3 links: Home, Serviços, Contato  
-- [ ] Colapse em um menu hambúrguer no mobile  
-- [ ] Os links fiquem alinhados à direita no desktop  
+- [✅] Tenha o nome **InovaWeb** como marca (navbar-brand)  
+- [✅] Tenha fundo azul escuro (`bg-primary` ou `bg-dark`)  
+- [✅] Tenha 3 links: Home, Serviços, Contato  
+- [✅] Colapse em um menu hambúrguer no mobile  
+- [✅] Os links fiquem alinhados à direita no desktop  
 
 > **Dica:** Use `navbar-expand-lg` para colapsar abaixo de 992px  
 > e `ms-auto` na `<ul>` para empurrar os links para a direita.
@@ -65,12 +65,12 @@ Crie uma navbar que:
 
 Crie uma seção de destaque que:
 
-- [ ] Tenha fundo colorido ou gradiente  
-- [ ] Tenha um título grande com a classe `display-4`  
-- [ ] Tenha um subtítulo com a classe `lead`  
-- [ ] Tenha um botão de call-to-action (`btn btn-light` ou similar)  
-- [ ] O conteúdo fique centralizado (`text-center`)  
-- [ ] Tenha espaçamento interno generoso (`py-5`)  
+- [✅] Tenha fundo colorido ou gradiente  
+- [✅] Tenha um título grande com a classe `display-4`  
+- [✅] Tenha um subtítulo com a classe `lead`  
+- [✅] Tenha um botão de call-to-action (`btn btn-light` ou similar)  
+- [✅] O conteúdo fique centralizado (`text-center`)  
+- [✅] Tenha espaçamento interno generoso (`py-5`)  
 
 > **Dica:** Use `class="container py-5 text-center"` como wrapper  
 > e `class="bg-primary text-white"` na section para o fundo azul.
@@ -81,12 +81,12 @@ Crie uma seção de destaque que:
 
 Crie uma seção com **3 cards de serviços** que:
 
-- [ ] No mobile: fiquem empilhados (col-12)  
-- [ ] No tablet: fiquem em 2 colunas (col-md-6)  
-- [ ] No desktop: fiquem em 3 colunas lado a lado (col-lg-4)  
-- [ ] Cada card tenha: título, descrição e botão "Saiba mais"  
-- [ ] Os cards tenham a mesma altura (use `h-100` no card)  
-- [ ] Tenha espaçamento entre os cards (use `g-4` na row)  
+- [✅] No mobile: fiquem empilhados (col-12)  
+- [✅] No tablet: fiquem em 2 colunas (col-md-6)  
+- [✅] No desktop: fiquem em 3 colunas lado a lado (col-lg-4)  
+- [✅] Cada card tenha: título, descrição e botão "Saiba mais"  
+- [✅] Os cards tenham a mesma altura (use `h-100` no card)  
+- [✅] Tenha espaçamento entre os cards (use `g-4` na row)  
 
 **Conteúdo sugerido para os cards:**
 
@@ -105,20 +105,20 @@ Crie uma seção com **3 cards de serviços** que:
 
 Crie um footer que:
 
-- [ ] Tenha fundo escuro (`bg-dark text-white`)  
-- [ ] Tenha o texto de copyright centralizado  
-- [ ] Tenha padding vertical adequado (`py-3`)  
+- [✅ ] Tenha fundo escuro (`bg-dark text-white`)  
+- [✅ ] Tenha o texto de copyright centralizado  
+- [✅ ] Tenha padding vertical adequado (`py-3`)  
 
 ---
 
 ## 🏆 Desafio Extra
 Adicione **uma dessas melhorias** na sua página:
 
-- [ ] **Badge** no card mais popular: 
+- [✅] **Badge** no card mais popular: 
 `<span class="badge bg-warning text-dark">Popular</span>`  
-- [ ] **Ícones Bootstrap:** inclua a biblioteca de ícones do Bootstrap 
+- [✅] **Ícones Bootstrap:** inclua a biblioteca de ícones do Bootstrap 
 e adicione um ícone em cada card  
-- [ ] **CSS customizado:** crie um `style.css` externo e sobrescreva 
+- [✅] **CSS customizado:** crie um `style.css` externo e sobrescreva 
 a cor primária do Bootstrap com a paleta da InovaWeb definida na Aula 3  
 
 ---
