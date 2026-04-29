@@ -1,0 +1,34 @@
+:root {
+    --black: #1e1e1e;
+    --lemon: #d5f106;
+    --pink: #fb25bb;
+    --blue: #0253fa;
+    --orange: #fc5602;
+    --gray: #eeeced;
+    --primary-metallic: #e0e0e0;
+    --accent-glow: #00d4ff;
+    --dark-bg: #0a0a0a;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--dark-bg);
+    color: #ffffff;
+    scroll-behavior: smooth;
+}
+
+/* Estética Metálica VNew */
+.navbar-brand {
+    font-weight: 900;
+    letter-spacing: -2px;
+    background: linear-gradient(180deg, #fff 0%, #888 50%, #eee 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.8rem;
+}
+
+.glass-nav {
+    background: rgba(10, 10, 10, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}

@@ -84,3 +84,23 @@ footer {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+/*portfolio*/
+.portfolio-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .portfolio-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(13, 202, 240, 0.1) !important;
+    border-color: #00d4ff !important;
+  }
+  .img-hover {
+    transition: transform 0.5s ease;
+  }
+  .portfolio-card:hover .img-hover {
+    transform: scale(1.1);
+  }
+  .object-fit-cover {
+    object-fit: cover;
+}

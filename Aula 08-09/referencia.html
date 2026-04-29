@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap 5 — Guia de Referência | Aula 9</title>
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+  CDN 1 — Bootstrap CSS
+  ───────────────────────────────────────────────────────────────
+  O que é CDN?
+    Content Delivery Network — rede de servidores distribuídos
+    pelo mundo que entrega arquivos de forma rápida e confiável.
+    Em vez de baixar o Bootstrap e colocar na sua pasta,
+    você aponta para o arquivo hospedado externamente.
+
+  Por que usar CDN?
+    ✅ Sem instalação — zero configuração local
+    ✅ O arquivo pode já estar em cache no navegador do usuário
+       (se ele acessou outro site que usa Bootstrap)
+    ✅ Sempre servido pela infraestrutura do jsDelivr (rápido)
+
+  O que esse arquivo contém?
+    Todo o CSS do Bootstrap: grid, componentes, utilitários,
+    cores, tipografia, formulários, tabelas etc.
+
+  IMPORTANTE: esse link vai no <head> — antes do </head>
+  ═══════════════════════════════════════════════════════════════
+  -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  >
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+  CDN 2 — Bootstrap Icons
+  ───────────────────────────────────────────────────────────────
+  O que é?
+    Biblioteca de ícones OFICIAL do Bootstrap.
+    São ícones em formato SVG transformados em fonte —
+    você os usa como texto, aplicando classes CSS.
+
+  É SEPARADO do Bootstrap CSS/JS?
+    SIM. São bibliotecas independentes.
+    Você pode usar Bootstrap sem os ícones, e vice-versa.
+    Por isso precisam de dois <link> diferentes.
+
+  Como usar um ícone?
+    <i class="bi bi-nome-do-icone"></i>
+    Onde encontrar os nomes? → icons.getbootstrap.com
+    Busque em inglês: "home", "cart", "envelope", "phone"...
+
+  Quantos ícones tem?
+    Mais de 2000 ícones gratuitos e de código aberto.
+  ═══════════════════════════════════════════════════════════════
+  -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  >
+
+  <style>
+    /*
+    ═══════════════════════════════════════════════════════════════
+    CSS PRÓPRIO — personalizando o Bootstrap
+    ───────────────────────────────────────────────────────────────
+    O Bootstrap 5 usa variáveis CSS (custom properties) internamente.
+    Isso significa que podemos sobrescrever a cor primária, fontes
+    e outros valores SEM modificar o arquivo original do Bootstrap.
+
+    Como funciona?
+      O Bootstrap declara suas cores em :root assim:
+        :root { --bs-primary: #0d6efd; }
+
+      Nós declaramos novamente em :root no NOSSO CSS:
+        :root { --bs-primary: #004a99; }
+
+      Como o nosso CSS vem DEPOIS do Bootstrap no <head>,
+      nossa declaração sobrescreve a original.
+      É como substituir o valor de uma variável.
+
+    Por que isso é importante?
+      Permite personalizar o Bootstrap sem alterar seus arquivos —
+      o que é fundamental quando você usa CDN.
+
+    Nesta página:
+      Trocamos o azul padrão (#0d6efd) pelo azul da InovaWeb (#004a99).
+    ═══════════════════════════════════════════════════════════════
+    */
+    :root {
+      --bs-primary: #004a99;
+      --bs-primary-rgb: 0, 74, 153; /* versão RGB — usada em transparências */
+    }
+
+    /* ── Estilo visual das seções do guia ─────────────────────── */
+    .secao-guia {
+      border-top: 3px solid #004a99; /* linha azul separando as seções */
+      padding-top: 2rem;
+      margin-top: 3rem;
+    }
+
+    .secao-guia h2 {
+      font-size: 1.6rem;
+      color: #004a99;
+      margin-bottom: 0.25rem;
+    }
+
+    /* Parágrafo descritivo abaixo do título de cada seção */
+    .secao-guia .descricao {
+      color: #636e72;
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      border-left: 3px solid #dee2e6; /* barra cinza à esquerda */
+      padding-left: 0.75rem;
+    }
+
+    /* Rótulo de subseção — ex: "Botões Sólidos", "Outline" */
+    .label-subsecao {
+      display: inline-block;
+      background: #f0f4ff;
+      color: #004a99;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      margin-bottom: 0.75rem;
+    }
+
+    /* Caixa cinza de fundo para cada demonstração */
+    .demo-box {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Caixa amarela de observações e dicas */
+    .nota {
+      background: #fff8e1;
+      border-left: 4px solid #ffc107;
+      padding: 0.6rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: 0.875rem;
+      color: #5a4a00;
+      margin-top: 0.75rem;
+    }
+
+    /* Cabeçalho do guia com gradiente */
+    .guia-header {
+      background: linear-gradient(135deg, #004a99, #6C63FF);
+      color: white;
+      padding: 3rem 0 2rem;
+    }
+
+    /*
+    ── Índice lateral com position: sticky ────────────────────────
+    Este é um exemplo REAL de position: sticky em uso.
+    O índice acompanha o scroll mas fica contido dentro da
+    sua coluna do grid — não ultrapassa o limite do pai.
+    Aprendemos position: sticky na Aula 6!
+    */
+    .indice {
+      position: sticky; /* gruda no topo ao rolar a página */
+      top: 20px;        /* distância do topo onde ele "gruda" */
+    }
+
+    .indice a {
+      display: block;
+      color: #004a99;
+      text-decoration: none;
+      font-size: 0.875rem;
+      padding: 4px 8px;
+      border-radius: 4px;
+      transition: background 0.2s; /* animação suave no hover */
+    }
+
+    .indice a:hover {
+      background: #f0f4ff;
+    }
+  </style>
+</head>
+<body>
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+  CABEÇALHO DO GUIA
+  ───────────────────────────────────────────────────────────────
+  Classes Bootstrap usadas aqui:
+    .container   → limita a largura e centraliza o conteúdo
+    .display-5   → título grande (tipografia Bootstrap)
+    .fw-bold     → font-weight: bold
+    .lead        → parágrafo de destaque (font-size maior)
+    .text-uppercase → text-transform: uppercase
+    .mb-1 / .mb-0  → margin-bottom: 0.25rem / 0
+  ═══════════════════════════════════════════════════════════════
+  -->
+  <header class="guia-header">
+    <div class="container">
+      <p class="text-uppercase fw-bold mb-1"
+         style="opacity: 0.7; letter-spacing: 2px; font-size: 0.8rem;">
+        Aula 9 — Material de Referência
+      </p>
+      <h1 class="display-5 fw-bold">Bootstrap 5</h1>
+      <p class="lead mb-0" style="opacity: 0.85;">
+        Alerts · Cards Avançados · Carrossel · Modal · Formulários
+      </p>
+    </div>
+  </header>
+
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+  LAYOUT PRINCIPAL — Grid de 2 colunas
+  ───────────────────────────────────────────────────────────────
+  Estrutura:
+    .container  → área centralizada com largura máxima
+    .row        → linha do grid
+    .col-lg-3   → coluna do índice (3/12 = 25%) — só no desktop
+    .col-lg-9   → coluna do conteúdo (9/12 = 75%)
+
+  d-none d-lg-block no índice:
+    → d-none       = display: none (esconde em mobile)
+    → d-lg-block   = display: block a partir de 992px (desktop)
+    → Em mobile, o conteúdo ocupa a largura toda (col-lg-9 vira col-12)
+  ═══════════════════════════════════════════════════════════════
+  -->
+  <div class="container py-5">
+    <div class="row">
+
+      <!-- ── ÍNDICE LATERAL ─────────────────────────────────────
+           Visível apenas em desktop (d-none d-lg-block)
+           Exemplo real de position: sticky em funcionamento!
+      ────────────────────────────────────────────────────────── -->
+      <div class="col-lg-3 d-none d-lg-block">
+        <nav class="indice">
+          <p class="fw-bold text-uppercase mb-2"
+             style="font-size: 0.75rem; letter-spacing: 1px; color: #636e72;">
+            Índice
+          </p>
+          <!-- Links âncora: href="#id" rola a página até o elemento com aquele id -->
+          <a href="#secao-cores">1. Cores e Fundos</a>
+          <a href="#secao-botoes">2. Botões</a>
+          <a href="#secao-alerts">3. Alerts</a>
+          <a href="#secao-cards">4. Cards Avançados</a>
+          <a href="#secao-carrossel">5. Carrossel</a>
+          <a href="#secao-modal">6. Modal</a>
+          <a href="#secao-formularios">7. Formulários</a>
+          <a href="#secao-icones">8. Ícones</a>
+          <div class="nota mt-3">
+            <strong>💡 Este índice</strong> usa
+            <code>position: sticky</code> —
+            role a página para ver o efeito!
+          </div>
+        </nav>
+      </div><!-- /col-lg-3 -->
+
+
+      <!-- ── CONTEÚDO DAS SEÇÕES ─────────────────────────────── -->
+      <div class="col-lg-9">
+
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEÇÃO 1 — CORES E FUNDOS                          ║
+             ╚══════════════════════════════════════════════════════╝
+
+          O Bootstrap tem 8 cores semânticas principais.
+          "Semântica" = cada cor tem um significado de uso:
+            primary   → ação principal / identidade da marca
+            secondary → ação secundária / neutro
+            success   → confirmação / resultado positivo
+            danger    → erro / ação destrutiva / risco
+            warning   → atenção / alerta moderado
+            info      → informação neutra / dica
+            light     → fundo claro / área de destaque suave
+            dark      → fundo escuro / texto forte
+
+          As mesmas 8 cores funcionam em duas categorias:
+            text-*  → aplica a cor no TEXTO do elemento
+            bg-*    → aplica a cor no FUNDO (background) do elemento
+        -->
+        <section id="secao-cores" class="secao-guia">
+          <h2>1. Cores e Fundos</h2>
+          <p class="descricao">
+            O Bootstrap tem uma paleta de 8 cores semânticas.
+            Cada cor tem um significado — <strong>primary</strong> é a cor principal da marca,
+            <strong>danger</strong> é para erros, <strong>success</strong> para confirmações etc.
+            As mesmas cores se aplicam em texto (<code>text-*</code>)
+            e em fundo (<code>bg-*</code>).
+          </p>
+
+          <!-- ── 1.1 Cores de texto ──────────────────────────── -->
+          <div class="label-subsecao">1.1 Cores de Texto — text-*</div>
+          <div class="demo-box">
+            <!--
+              Sintaxe: class="text-[nome-da-cor]"
+              Equivale em CSS a: color: [valor-hex-interno-do-bootstrap];
+              Não precisa escrever CSS — só adicionar a classe.
+            -->
+            <p class="text-primary fw-bold">text-primary — Azul principal (identidade da marca)</p>
+            <p class="text-secondary fw-bold">text-secondary — Cinza (ação secundária)</p>
+            <p class="text-success fw-bold">text-success — Verde (confirmação, resultado positivo)</p>
+            <p class="text-danger fw-bold">text-danger — Vermelho (erro, perigo, ação destrutiva)</p>
+            <p class="text-warning fw-bold">text-warning — Amarelo (atenção, aviso moderado)</p>
+            <p class="text-info fw-bold">text-info — Azul claro (informação neutra)</p>
+            <p class="text-muted fw-bold mb-0">text-muted — Cinza suave (texto secundário, legendas)</p>
+          </div>
+
+          <!-- ── 1.2 Cores de fundo ──────────────────────────── -->
+          <div class="label-subsecao">1.2 Cores de Fundo — bg-*</div>
+          <div class="demo-box">
+            <!--
+              Sintaxe: class="bg-[nome-da-cor]"
+              Equivale em CSS a: background-color: [valor];
+
+              Dicas de combinação:
+                bg-primary / secondary / success / danger / dark
+                  → combine com text-white para legibilidade
+                bg-warning / light
+                  → fundos claros, texto escuro padrão já funciona
+            -->
+            <div class="bg-primary text-white p-2 mb-2 rounded">bg-primary + text-white</div>
+            <div class="bg-secondary text-white p-2 mb-2 rounded">bg-secondary + text-white</div>
+            <div class="bg-success text-white p-2 mb-2 rounded">bg-success + text-white</div>
+            <div class="bg-danger text-white p-2 mb-2 rounded">bg-danger + text-white</div>
+            <div class="bg-warning p-2 mb-2 rounded">bg-warning (fundo claro — não usa text-white)</div>
+            <div class="bg-light p-2 mb-2 rounded border">bg-light + border (quase branco, use borda para visualizar)</div>
+            <div class="bg-dark text-white p-2 rounded">bg-dark + text-white</div>
+          </div>
+
+          <!-- ── 1.3 Personalizando com variáveis CSS ─────────── -->
+          <div class="label-subsecao">1.3 Personalizando com CSS Próprio</div>
+          <div class="demo-box">
+            <p class="mb-2">
+              O Bootstrap 5 usa variáveis CSS (<code>--bs-primary</code>,
+              <code>--bs-danger</code>, etc.) internamente em vez de valores fixos.
+              Isso permite trocar toda a paleta do site sobrescrevendo
+              apenas as variáveis no <code>:root</code> do seu CSS,
+              sem precisar modificar ou baixar o Bootstrap:
+            </p>
+            <!--
+              <pre> preserva quebras de linha e espaços — ideal para código
+              <code> indica semanticamente que é um trecho de código
+            -->
+            <pre class="bg-dark text-success p-3 rounded" style="font-size: 0.85rem;"><code>/* No seu style.css — DEPOIS do link do Bootstrap no head */
+:root {
+  --bs-primary:     #6C63FF;        /* substitui o azul padrão */
+  --bs-primary-rgb: 108, 99, 255;   /* versão RGB para transparências */
+}</code></pre>
+            <div class="nota">
+              💡 As cores desta página já foram personalizadas assim —
+              o azul aqui é <strong>#004a99</strong> (cor da InovaWeb),
+              não o <strong>#0d6efd</strong> padrão do Bootstrap.
+              Inspecione qualquer elemento azul no DevTools para confirmar!
+            </div>
+          </div>
+        </section><!-- /secao-cores -->
+
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEÇÃO 2 — BOTÕES                                  ║
+             ╚══════════════════════════════════════════════════════╝
+
+          Todo botão Bootstrap precisa de DUAS classes obrigatórias:
+            1. btn      → classe base (define padding, cursor, display,
+                           font-weight, border-radius, transições)
+            2. btn-*    → classe de variação (define cor e estilo)
+
+          Funciona em qualquer elemento HTML:
+            <button class="btn btn-primary">texto</button>
+            <a href="#" class="btn btn-primary">texto</a>
+            <input type="submit" class="btn btn-primary" value="texto">
+        -->
+        <section id="secao-botoes" class="secao-guia">
+          <h2>2. Botões</h2>
+          <p class="descricao">
+            Botões recebem sempre a classe base <code>btn</code>
+            mais uma classe de variação. Funcionam em
+            <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code>
+            e <code>&lt;input type="submit"&gt;</code>.
+          </p>
+
+          <!-- ── 2.1 Sólidos ────────────────────────────────── -->
+          <div class="label-subsecao">2.1 Botões Sólidos — fundo colorido sólido</div>
+          <div class="demo-box d-flex flex-wrap gap-2">
+            <!--
+              d-flex    → display: flex (coloca os botões em linha)
+              flex-wrap → quebra a linha quando não cabe na tela
+              gap-2     → espaço de 0.5rem entre os itens (sem margin manual)
+            -->
+            <button class="btn btn-primary">btn-primary</button>
+            <button class="btn btn-secondary">btn-secondary</button>
+            <button class="btn btn-success">btn-success</button>
+            <button class="btn btn-danger">btn-danger</button>
+            <button class="btn btn-warning">btn-warning</button>
+            <button class="btn btn-info">btn-info</button>
+            <button class="btn btn-light">btn-light</button>
+            <button class="btn btn-dark">btn-dark</button>
+          </div>
+
+          <!-- ── 2.2 Outline ───────────────────────────────── -->
+          <div class="label-subsecao">2.2 Botões Outline — fundo transparente, borda colorida</div>
+          <div class="demo-box d-flex flex-wrap gap-2">
+            <!--
+              btn-outline-* → fundo transparente + borda + texto coloridos
+              No hover: o fundo preenche com a cor sólida automaticamente
+              Muito usado para botões secundários ou ação alternativa
+            -->
+            <button class="btn btn-outline-primary">outline-primary</button>
+            <button class="btn btn-outline-secondary">outline-secondary</button>
+            <button class="btn btn-outline-success">outline-success</button>
+            <button class="btn btn-outline-danger">outline-danger</button>
+          </div>
+
+          <!-- ── 2.3 Tamanhos ───────────────────────────────── -->
+          <div class="label-subsecao">2.3 Tamanhos — btn-lg e btn-sm</div>
+          <div class="demo-box d-flex align-items-center flex-wrap gap-3">
+            <!--
+              btn-lg → padding maior + font-size maior (bom para CTAs)
+              (sem classe extra) → tamanho padrão (médio)
+              btn-sm → padding menor + font-size menor (bom para tabelas)
+            -->
+            <button class="btn btn-primary btn-lg">btn-lg — Grande</button>
+            <button class="btn btn-primary">Normal (padrão)</button>
+            <button class="btn btn-primary btn-sm">btn-sm — Pequeno</button>
+          </div>
+
+          <!-- ── 2.4 Variações Especiais ────────────────────── -->
+          <div class="label-subsecao">2.4 Variações Especiais</div>
+          <div class="demo-box d-flex flex-wrap gap-2 align-items-center">
+
+            <!--
+              w-100 = width: 100%
+              O botão ocupa toda a largura disponível do container.
+              Muito usado em formulários mobile e CTAs de seção.
+            -->
+            <div class="w-100 mb-2">
+              <button class="btn btn-primary w-100">
+                w-100 — Botão de Largura Total
+              </button>
+            </div>
+
+            <!--
+              Ícone + texto no botão:
+              <i class="bi bi-nome"> insere o ícone
+              me-2 = margin-end: 0.5rem (espaço entre ícone e texto)
+            -->
+            <button class="btn btn-primary">
+              <i class="bi bi-send-fill me-2"></i>Com Ícone
+            </button>
+
+            <!--
+              disabled: atributo HTML nativo que desativa o botão
+              O Bootstrap detecta e aplica estilos automaticamente:
+              opacity: 0.65 + cursor: not-allowed
+            -->
+            <button class="btn btn-secondary" disabled>
+              Desabilitado
+            </button>
+
+            <!--
+              <a> com classe btn: tem visual de botão mas funciona como link
+              Útil quando o destino é uma URL (href) mas o visual deve ser botão
+            -->
+            <a href="#" class="btn btn-outline-primary">
+              Link como Botão
+            </a>
+
+          </div>
+        </section><!-- /secao-botoes -->
+
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEÇÃO 3 — ALERTS                                  ║
+             ╚══════════════════════════════════════════════════════╝
+
+          Alerts são caixas de feedback para comunicar estados ao usuário.
+          Estrutura mínima:
+            <div class="alert alert-[tipo]">mensagem aqui</div>
+
+          Tipos disponíveis (as mesmas 8 cores semânticas):
+            alert-success   → confirmação, ação concluída com sucesso
+            alert-danger    → erro, falha, ação destrutiva
+            alert-warning   → atenção, preencha algo, aviso moderado
+            alert-info      → informação neutra, dica
+            alert-primary, secondary, light, dark → variações
+
+          A versão "dismissible" com botão de fechar é a
+          PRIMEIRA VEZ que vemos JavaScript do Bootstrap em ação!
+          O botão X usa data-bs-dismiss para instruir o JS.
+        -->
+        <section id="secao-alerts" class="secao-guia">
+          <h2>3. Alerts</h2>
+          <p class="descricao">
+            Caixas de feedback para comunicar estados ao usuário.
+            A versão com botão de fechar usa JavaScript do Bootstrap —
+            nossa primeira "ponte" para o JS!
+          </p>
+
+          <!-- ── 3.1 Alerts básicos ─────────────────────────── -->
+          <div class="label-subsecao">3.1 Alerts Básicos</div>
+          <div class="demo-box">
+            <!--
+              O Bootstrap aplica automaticamente:
+                background-color suave (versão clara da cor semântica)
+                border (borda na mesma cor, mais escura)
+                color (texto escuro compatível com o fundo)
+              Você não precisa definir nenhum desses valores manualmente.
+            -->
+            <div class="alert alert-success">
+              <i class="bi bi-check-circle me-2"></i>
+              <strong>alert-success</strong> — Mensagem enviada com sucesso!
+            </div>
+            <div class="alert alert-danger">
+              <i class="bi bi-x-circle me-2"></i>
+              <strong>alert-danger</strong> — Erro ao processar sua solicitação.
+            </div>
+            <div class="alert alert-warning">
+              <i class="bi bi-exclamation-triangle me-2"></i>
+              <strong>alert-warning</strong> — Preencha todos os campos obrigatórios.
+            </div>
+            <div class="alert alert-info mb-0">
+              <i class="bi bi-info-circle me-2"></i>
+              <strong>alert-info</strong> — Seus dados estão sendo processados.
+            </div>
+          </div>
+
+          <!-- ── 3.2 Alert com link ──────────────────────────── -->
+          <div class="label-subsecao">3.2 Alert com Link</div>
+          <div class="demo-box">
+            <div class="alert alert-info mb-0">
+              Acesse nossa
+              <!--
+                alert-link: adapta a cor do link para combinar
+                visualmente com o fundo do alert.
+                Sem essa classe, o link ficaria azul padrão,
+                quebrando a consistência visual do componente.
+              -->
+              <a href="#" class="alert-link">política de privacidade</a>
+              para mais informações.
+            </div>
+            <div class="nota">
+              Use <code>alert-link</code> nos links dentro do alert
+              para manter a consistência visual do componente.
+            </div>
+          </div>
+
+          <!-- ── 3.3 Alert dispensável ──────────────────────── -->
+          <div class="label-subsecao">3.3 Alert Dispensável — com botão de fechar</div>
+          <div class="demo-box">
+            <!--
+              Para criar um alert que pode ser fechado, são necessárias
+              3 adições em relação ao alert básico:
+
+              1. alert-dismissible
+                 → Reserva espaço no lado direito para o botão X
+                 → Aplica padding-end extra no alert
+
+              2. fade show
+                 → fade  : define que haverá uma transição de opacidade
+                 → show  : torna o elemento visível (opacity: 1)
+                 → Quando o X é clicado, o JS remove "show" →
+                   a transição CSS faz o fade out → depois remove do DOM
+
+              3. <button data-bs-dismiss="alert">
+                 → btn-close: botão X estilizado sem texto
+                 → data-bs-dismiss="alert": atributo que o JS lê
+                   para saber O QUE fechar quando clicado
+                 → aria-label="Fechar": acessibilidade para leitores de tela
+                   (botão sem texto precisa de rótulo acessível)
+            -->
+            <div class="alert alert-success alert-dismissible fade show">
+              <i class="bi bi-check-circle me-2"></i>
+              <strong>Formulário enviado!</strong> Entraremos em contato em breve.
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="alert"
+                aria-label="Fechar">
+              </button>
+            </div>
+            <div class="nota">
+              🔌 <strong>JavaScript em ação!</strong>
+              O atributo <code>data-bs-dismiss="alert"</code> é lido pelo
+              JavaScript do Bootstrap. Quando o botão é clicado, o JS:
+              1) Remove a classe <code>show</code> do alert (inicia o fade out)
+              2) Aguarda a transição CSS terminar (300ms)
+              3) Remove o elemento do DOM completamente
+              Você não escreveu uma linha de JavaScript — mas JS rodou.
+              Na próxima aula vamos entender como isso funciona por dentro!
+            </div>
+          </div>
+        </section><!-- /secao-alerts -->
+
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEÇÃO 4 — CARDS AVANÇADOS                         ║
+             ╚══════════════════════════════════════════════════════╝
+
+          Card é um dos componentes mais versáteis do Bootstrap.
+
+          Estrutura mínima (obrigatória):
+            <div class="card">
+              <div class="card-body">conteúdo aqui</div>
+            </div>
+
+          Partes opcionais que podem ser adicionadas:
+            card-img-top   → imagem no topo do card
+            card-header    → cabeçalho cinza acima do body
+            card-footer    → rodapé cinza abaixo do body
+            card-title     → título do card (h5 por padrão)
+            card-text      → parágrafo de texto
+            badge          → etiqueta colorida (inline no conteúdo
+                              ou posicionado com CSS puro)
+        -->
+        <section id="secao-cards" class="secao-guia">
+          <h2>4. Cards Avançados</h2>
+          <p class="descricao">
+            Cards suportam imagem, cabeçalho, corpo, rodapé e badges.
+            Use <code>h-100</code> em grids para manter todos com a mesma altura.
+          </p>
+
+          <!-- ── 4.1 Card completo ───────────────────────────── -->
+          <div class="label-subsecao">4.1 Card Completo — imagem, body, footer e badge</div>
+          <div class="demo-box">
+            <div class="row">
+              <div class="col-md-6 col-lg-5">
+
+                <!--
+                  BADGE COM POSITION ABSOLUTE
+                  ─────────────────────────────
+                  Este exemplo combina Bootstrap com o CSS da Aula 6!
+
+                  O WRAPPER EXTERNO recebe position: relative
+                    → Cria o contexto de posicionamento
+                    → O badge absolute vai se ancorar aqui
+
+                  O BADGE recebe position: absolute
+                    → Sai do fluxo normal do documento
+                    → Se posiciona em relação ao pai com position: relative
+                    → Sem o pai com relative, iria para o canto da tela!
+
+                  z-index: 1 garante que o badge fique na frente do card.
+                -->
+                <div style="position: relative;">
+
+                  <!-- Badge posicionado com CSS puro sobre o card -->
+                  <span class="badge bg-warning text-dark"
+                    style="
+                      position: absolute; /* âncora no pai (position: relative) */
+                      top: -10px;         /* 10px acima do topo do card */
+                      right: -10px;       /* 10px para fora do lado direito */
+                      z-index: 1;         /* fica na frente da imagem */
+                      padding: 6px 12px;
+                      font-size: 0.8rem;
+                    ">
+                    Popular
+                  </span>
+
+                  <div class="card shadow-sm h-100">
+
+                    <!--
+                      card-img-top → imagem encostada no topo do card
+                      Sem bordas laterais ou superior — Bootstrap remove automaticamente.
+
+                      placehold.co: serviço de imagens placeholder
+                      Formato da URL: /LARGURAxALTURA/COR-FUNDO/COR-TEXTO
+                      Ex: /400x180/004a99/ffffff = 400x180px, fundo azul, texto branco
+                    -->
+                    <img
+                      src="https://placehold.co/400x180/004a99/ffffff?text=Imagem+do+Card"
+                      class="card-img-top"
+                      alt="Banner do serviço de Desenvolvimento Web da InovaWeb">
+
+                    <!-- card-body: área principal de conteúdo do card -->
+                    <div class="card-body">
+
+                      <!--
+                        badge INLINE (diferente do badge com position absolute):
+                        Este fica no fluxo normal do conteúdo, dentro do card-body.
+                        Sintaxe: <span class="badge bg-[cor]">texto</span>
+                        mb-2 = margin-bottom: 0.5rem (espaço abaixo do badge)
+                      -->
+                      <span class="badge bg-primary mb-2">Destaque</span>
+
+                      <!-- card-title: título principal do card -->
+                      <h5 class="card-title">Desenvolvimento Web</h5>
+
+                      <!-- card-text: parágrafo descritivo do card -->
+                      <p class="card-text text-muted">
+                        Sites modernos e responsivos com IA integrada.
+                      </p>
+
+                      <a href="#" class="btn btn-primary btn-sm">
+                        <i class="bi bi-arrow-right me-1"></i>Saiba mais
+                      </a>
+                    </div><!-- /card-body -->
+
+                    <!--
+                      card-footer: rodapé do card
+                      Fundo levemente cinza por padrão do Bootstrap.
+                      Ideal para: preços, datas, categorias, metadados.
+                    -->
+                    <div class="card-footer text-muted">
+                      <small>
+                        <i class="bi bi-tag me-1"></i>A partir de R$ 1.500
+                      </small>
+                    </div>
+
+                  </div><!-- /card -->
+                </div><!-- /wrapper com position: relative -->
+
+              </div>
+            </div>
+            <div class="nota mt-3">
+              O badge usa <code>position: absolute</code> no wrapper e
+              <code>position: relative</code> no pai —
+              exatamente o que aprendemos na Aula 6!
+              Bootstrap e CSS puro trabalhando juntos.
+            </div>
+          </div>
+
+          <!-- ── 4.2 Card horizontal ────────────────────────── -->
+          <div class="label-subsecao">4.2 Card Horizontal — imagem e conteúdo lado a lado</div>
+          <div class="demo-box">
+            <!--
+              Card horizontal usa o próprio GRID DO BOOTSTRAP internamente.
+
+              row g-0: linha sem gap (gutter zero entre colunas)
+                Se não usar g-0, haverá um espaço branco entre a imagem
+                e o texto, quebrando a aparência do card.
+
+              col-4: imagem ocupa 4/12 = 33% da largura do card
+              col-8: conteúdo ocupa 8/12 = 67% da largura do card
+            -->
+            <div class="card">
+              <div class="row g-0">
+                <div class="col-4">
+                  <img
+                    src="https://placehold.co/200x150/6C63FF/ffffff?text=Foto"
+                    class="img-fluid rounded-start h-100"
+                    style="object-fit: cover;"
+                    alt="Imagem ilustrativa do card horizontal">
+                  <!--
+                    img-fluid     → width: 100% / height: auto (imagem responsiva)
+                    rounded-start → arredonda APENAS os cantos esquerdos
+                                    (top-left e bottom-left)
+                                    Combina com a borda esquerda arredondada do card
+                    h-100         → height: 100% — preenche toda a altura do card
+                    object-fit: cover → a imagem preenche o espaço sem distorcer,
+                                        cortando o excesso nas bordas
+                  -->
+                </div>
+                <div class="col-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Card Horizontal</h5>
+                    <p class="card-text text-muted">
+                      Imagem e conteúdo lado a lado usando o grid
+                      do Bootstrap dentro do próprio card.
+                    </p>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Ver mais</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 4.3 Cards em grid com altura igual ─────────── -->
+          <div class="label-subsecao">4.3 Cards em Grid — altura uniforme com h-100</div>
+          <div class="demo-box">
+            <!--
+              PROBLEMA CLÁSSICO:
+              Cards com textos de tamanhos diferentes ficam com
+              alturas diferentes, quebrando o alinhamento visual.
+
+              SOLUÇÃO: h-100 no card
+              O card cresce para preencher 100% da altura da coluna.
+              Como o Bootstrap usa Flexbox nas colunas da row,
+              todas as colunas de uma mesma row têm a mesma altura.
+              Com h-100, os cards preenchem essa altura igual.
+
+              g-4 na row: gap de 1.5rem entre as colunas (gutter)
+            -->
+            <div class="row g-4">
+
+              <div class="col-md-4">
+                <!--
+                  h-100  → o card expande até a altura da coluna
+                  shadow-sm → box-shadow suave (dá sensação de elevação)
+                -->
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body">
+                    <!--
+                      fs-2  → font-size: 2rem (ícone grande)
+                      d-block → display: block (o ícone fica sozinho na linha)
+                      mb-2  → margin-bottom: 0.5rem (espaço abaixo do ícone)
+                    -->
+                    <i class="bi bi-code-slash fs-2 text-primary d-block mb-2"></i>
+                    <h5 class="card-title">Dev Web</h5>
+                    <p class="card-text text-muted">Texto curto aqui.</p>
+                  </div>
+                  <!-- card-footer gruda no fundo graças ao h-100 -->
+                  <div class="card-footer">
+                    <a href="#" class="btn btn-primary w-100">Saiba mais</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body">
+                    <i class="bi bi-stars fs-2 text-primary d-block mb-2"></i>
+                    <h5 class="card-title">Design IA</h5>
+                    <p class="card-text text-muted">
+                      Este card tem um texto bem mais longo para demonstrar
+                      que o <code>h-100</code> mantém todos os cards com
+                      a mesma altura, independente do tamanho do conteúdo.
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="btn btn-primary w-100">Saiba mais</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card h-100 shadow-sm">
+                  <div class="card-body">
+                    <i class="bi bi-graph-up fs-2 text-primary d-block mb-2"></i>
+                    <h5 class="card-title">Consultoria</h5>
+                    <p class="card-text text-muted">Texto médio aqui.</p>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" class="btn btn-primary w-100">Saiba mais</a>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /row -->
+            <div class="nota">
+              <code>h-100</code> no card + <code>g-4</code> na row
+              são a combinação padrão para grids de cards com altura uniforme.
+            </div>
+          </div>
+        </section><!-- /secao-cards -->
+
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEÇÃO 5 — CARROSSEL                               ║
+             ╚══════════════════════════════════════════════════════╝
+
+          O carrossel apresenta múltiplos conteúdos no mesmo espaço
+          da tela, com navegação automática ou manual.
+
+          Funciona 100% via atributos data-bs-* no HTML —
+          o JavaScript do Bootstrap lê esses atributos e
+          executa as ações correspondentes (trocar slides,
+          controlar animações, gerenciar indicadores etc.)
+
+          ESTRUTURA OBRIGATÓRIA (nessa ordem):
+          ┌─ div.carousel.slide (container + ID único)
+          │  ├─ div.carousel-indicators (bolinhas — opcional)
+          │  ├─ div.carousel-inner (container dos slides)
+          │  │  ├─ div.carousel-item.active (slide 1 — ATIVO)
+          │  │  ├─ div.carousel-item (slide 2)
+          │  │  └─ div.carousel-item (slide N)
+          │  ├─ button.carousel-control-prev (seta esquerda)
+          │  └─ button.carousel-control-next (seta direita)
+          └─
+
+          ATENÇÃO: O Bootstrap JS (CDN 3 — bundle) PRECISA estar
+          incluído para o carrossel funcionar!
+        -->
+        <section id="secao-carrossel" class="secao-guia">
+          <h2>5. Carrossel</h2>
+          <p class="descricao">
+            Componente de slides com navegação automática e manual.
+            Funciona 100% via atributos <code>data-bs-*</code> —
+            JavaScript do Bootstrap interpretando o HTML em tempo real!
+          </p>
+
+          <div class="demo-box p-0 overflow-hidden rounded">
+            <!--
+              id="carrosselRef"
+                → Identificador único deste carrossel na página.
+                → Os botões de controle e os indicadores usam este ID
+                  em data-bs-target para saber QUAL carrossel controlar.
+                → Se você tiver dois carrosséis na mesma página,
+                  cada um precisa de um ID diferente!
+
+              class="carousel slide"
+                → carousel: declara que este elemento é um carrossel Bootstrap
+                → slide: define a animação de transição (deslizar lateralmente)
+                → alternativa: "carousel-fade" para transição por fade
+
+              data-bs-ride="carousel"
+                → Instrui o Bootstrap a iniciar a rotação automática
+                  assim que a página termina de carregar.
+                → Remova este atributo para desativar o avanço automático
+                  (o usuário só navega manualmente com os controles).
+            -->
+            <div id="carrosselRef" class="carousel slide" data-bs-ride="carousel">
+
+              <!--
+                CAROUSEL INDICATORS — bolinhas de navegação
+                ─────────────────────────────────────────────
+                Cada <button> representa um slide.
+                Clicar em uma bolinha navega diretamente para aquele slide.
+
+                data-bs-target="#carrosselRef"
+                  → Aponta para qual carrossel estas bolinhas controlam.
+                  → Deve bater com o ID do container do carrossel.
+
+                data-bs-slide-to="0"
+                  → Índice do slide para o qual esta bolinha navega.
+                  → Começa em 0 (primeiro slide), 1, 2, etc.
+
+                class="active"
+                  → Indica qual bolinha e slide estão ativos no carregamento.
+                  → OBRIGATÓRIO em exatamente UMA bolinha.
+              -->
+              <div class="carousel-indicators">
+                <button data-bs-target="#carrosselRef" data-bs-slide-to="0" class="active" aria-label="Slide 1"></button>
+                <button data-bs-target="#carrosselRef" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button data-bs-target="#carrosselRef" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              </div>
+
+              <!--
+                CAROUSEL INNER — wrapper obrigatório dos slides
+                Todos os slides devem estar diretamente dentro deste div.
+              -->
+              <div class="carousel-inner">
+
+                <!--
+                  SLIDE 1 — com class="active" (obrigatório)
+                  ─────────────────────────────────────────────
+                  carousel-item: define cada slide individual
+                  class="active": OBRIGATÓRIO em exatamente UM slide.
+                    → Sem "active", o carrossel inicia com todos os slides
+                      escondidos — parece quebrado!
+
+                  Na imagem:
+                    d-block → display: block (remove espaço inline abaixo)
+                    w-100   → width: 100% (preenche toda a largura do carrossel)
+                -->
+                <div class="carousel-item active">
+                  <img
+                    src="https://placehold.co/900x300/004a99/ffffff?text=Slide+1+Desenvolvimento+Web"
+                    class="d-block w-100"
+                    alt="Slide 1: Desenvolvimento Web">
+                  <!--
+                    carousel-caption: legenda sobreposta à imagem (posição absoluta)
+                    d-none d-md-block: esconde em mobile, exibe tablet+ (≥768px)
+                    Motivo: em telas pequenas a imagem fica comprimida e
+                    a legenda torna-se ilegível ou sobrepõe muito o conteúdo.
+                  -->
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Desenvolvimento Web</h5>
+                    <p>Sites modernos e responsivos com IA.</p>
+                  </div>
+                </div>
+
+                <!-- SLIDE 2 -->
+                <div class="carousel-item">
+                  <img
+                    src="https://placehold.co/900x300/6C63FF/ffffff?text=Slide+2+Design+com+IA"
+                    class="d-block w-100"
+                    alt="Slide 2: Design com IA">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Design com Inteligência Artificial</h5>
+                    <p>Layouts gerados e otimizados com IA.</p>
+                  </div>
+                </div>
+
+                <!-- SLIDE 3 -->
+                <div class="carousel-item">
+                  <img
+                    src="https://placehold.co/900x300/003366/ffffff?text=Slide+3+Consultoria+Digital"
+                    class="d-block w-100"
+                    alt="Slide 3: Consultoria Digital">
+                  <div class="carousel-caption d-none d-md-block">
+                    <h5>Consultoria Digital</h5>
+                    <p>Estratégia de presença digital para seu negócio.</p>
+                  </div>
+                </div>
+
+              </div><!-- /carousel-inner -->
+
+              <!--
+                BOTÕES DE CONTROLE — anterior e próximo
+                ─────────────────────────────────────────
+                carousel-control-prev / carousel-control-next
+                  → Posicionam os botões à esquerda e à direita
+                    com position: absolute internamente.
+
+                data-bs-target="#carrosselRef"
+                  → Qual carrossel controlar (pelo ID).
+
+                data-bs-slide="prev" / data-bs-slide="next"
+                  → Instrução de direção para o JavaScript do Bootstrap.
+
+                carousel-control-prev-icon / carousel-control-next-icon
+                  → Ícones de seta embutidos via CSS do Bootstrap
+                    (SVGs encodados em Base64 no background-image).
+                  → Nenhuma imagem externa necessária!
+              -->
+              <button
+                class="carousel-control-prev"
+                data-bs-target="#carrosselRef"
+                data-bs-slide="prev"
+                aria-label="Slide anterior">
+                <span class="carousel-control-prev-icon"></span>
+              </button>
+
+              <button
+                class="carousel-control-next"
+                data-bs-target="#carrosselRef"
+                data-bs-slide="next"
+                aria-label="Próximo slide">
+                <span class="carousel-control-next-icon"></span>
+              </button>
+
+            </div><!-- /carrossel -->
+          </div><!-- /demo-box -->
+
+          <div class="nota mt-2">
+            🔌 <strong>JavaScript em ação!</strong>
+            Experimente no DevTools: remova <code>data-bs-ride="carousel"</code>
+            do container — o avanço automático para.
+            Remova <code>data-bs-target</code> de um botão de controle —
+            ele para de funcionar completamente.
+            Esses atributos são a ponte entre o HTML e o JavaScript do Bootstrap.
+            Na próxima aula você vai entender como escrever esse JS por conta própria!
+          </div>
+        </section><!-- /secao-carrossel -->
+
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEÇÃO 6 — MODAL                                   ║
+             ╚══════════════════════════════════════════════════════╝
+
+          Modal é uma janela de diálogo que aparece SOBRE o conteúdo.
+          Usos comuns: formulários de contato, confirmações de exclusão,
+          detalhes de produto, avisos importantes, galeria de imagens.
+
+          COMO FUNCIONA (3 partes):
+            1. BOTÃO GATILHO — qualquer elemento com:
+               data-bs-toggle="modal"  → instrui: "abra um modal"
+               data-bs-target="#idModal" → qual modal abrir
+
+            2. ESTRUTURA DO MODAL — o HTML da janela:
+               .modal → container invisível (fora do fluxo normal)
+               .modal-dialog → centraliza e limita a largura
+               .modal-content → a caixa branca visível
+
+            3. O BOOTSTRAP JS — conecta tudo:
+               Lê os atributos data-bs-* e executa as ações
+
+          O que o Bootstrap JS faz automaticamente:
+            → Torna o modal visível com animação de fade
+            → Adiciona um backdrop escuro atrás do modal
+            → Bloqueia o scroll do body (overflow: hidden)
+            → Fecha ao clicar fora (no backdrop)
+            → Fecha ao pressionar a tecla Esc
+            → Gerencia o foco de acessibilidade (tabindex, aria)
+          TUDO ISSO SEM VOCÊ ESCREVER UMA LINHA DE JAVASCRIPT!
+        -->
+        <section id="secao-modal" class="secao-guia">
+          <h2>6. Modal</h2>
+          <p class="descricao">
+            Janela de diálogo que aparece sobre o conteúdo da página.
+            O botão se conecta ao modal pelo ID via
+            <code>data-bs-toggle</code> e <code>data-bs-target</code>.
+          </p>
+
+          <div class="label-subsecao">6.1 Botões que abrem os Modals</div>
+          <div class="demo-box d-flex gap-3 flex-wrap">
+            <!--
+              BOTÃO GATILHO DO MODAL
+              ─────────────────────────
+              Pode ser qualquer elemento HTML: <button>, <a>, <div>...
+              O que importa são os atributos:
+
+              data-bs-toggle="modal"
+                → Informa ao Bootstrap: "ao clicar neste elemento, abra um modal"
+
+              data-bs-target="#modalSimples"
+                → Qual modal abrir — deve bater EXATAMENTE com o id
+                  do elemento <div class="modal" id="modalSimples">
+                → O # é obrigatório (é um seletor CSS)
+            -->
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#modalSimples">
+              <i class="bi bi-eye me-2"></i>Abrir Modal Simples
+            </button>
+
+            <button
+              class="btn btn-outline-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#modalFormulario">
+              <i class="bi bi-envelope me-2"></i>Abrir Modal com Formulário
+            </button>
+          </div>
+
+          <div class="nota">
+            🔌 <strong>JavaScript em ação!</strong>
+            Quando o botão é clicado, o JS do Bootstrap executa em sequência:
+            1) Localiza o elemento com o ID definido em <code>data-bs-target</code>
+            2) Adiciona a classe <code>show</code> ao modal (tornando-o visível)
+            3) Cria e insere um backdrop escuro no DOM
+            4) Aplica <code>overflow: hidden</code> no body (bloqueia scroll)
+            5) Gerencia o foco do teclado e acessibilidade via aria
+            Ao fechar: o processo é revertido com animação de fade (300ms).
+          </div>
+        </section><!-- /secao-modal -->
+
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEÇÃO 7 — FORMULÁRIOS                             ║
+             ╚══════════════════════════════════════════════════════╝
+
+          O Bootstrap estiliza formulários nativos do HTML.
+          Você escreve o HTML padrão e adiciona classes Bootstrap —
+          o resultado é um formulário bonito e consistente
+          em todos os navegadores (Chrome, Firefox, Safari, Edge).
+
+          PROBLEMA SEM BOOTSTRAP:
+            <input>, <select>, <textarea> têm aparências completamente
+            diferentes entre navegadores. A Apple, Google e Mozilla
+            têm estilos próprios que conflitam.
+
+          SOLUÇÃO DO BOOTSTRAP:
+            As classes form-control, form-select, form-check
+            RESETAM os estilos nativos e aplicam um visual padronizado
+            com: altura, padding, borda, border-radius e cor de foco
+            consistentes em todos os navegadores.
+
+          CLASSES PRINCIPAIS:
+            form-label   → estiliza o <label>
+            form-control → estiliza <input> e <textarea>
+            form-select  → estiliza <select>
+            form-check   → container para <input type="checkbox/radio">
+            mb-3         → espaço padrão de 1rem entre grupos de campos
+        -->
+        <section id="secao-formularios" class="secao-guia">
+          <h2>7. Formulários</h2>
+          <p class="descricao">
+            O Bootstrap padroniza a aparência dos formulários em todos os
+            navegadores. Use <code>mb-3</code> para espaçamento consistente
+            entre os campos.
+          </p>
+
+          <div class="demo-box">
+            <form>
+
+              <!-- ── Campo de texto ──────────────────────────
+                ESTRUTURA PADRÃO DE CAMPO:
+                  <div class="mb-3">         → grupo (label + input + espaço)
+                    <label class="form-label"> → rótulo do campo
+                    <input class="form-control"> → campo de entrada
+                  </div>
+
+                mb-3 no div → margin-bottom: 1rem entre campos
+
+                form-label → aplica:
+                  display: block (ocupa linha inteira)
+                  margin-bottom: 0.5rem (espaço entre label e input)
+
+                form-control no input → aplica:
+                  display: block, width: 100%
+                  padding: 0.375rem 0.75rem
+                  border: 1px solid #ced4da
+                  border-radius: 0.375rem
+                  No :focus → border-color azul + box-shadow azul suave
+
+                CONEXÃO label ↔ input (OBRIGATÓRIA):
+                  O id do input e o for do label devem ser IGUAIS.
+                  Por quê?
+                    → Clicar no label foca o input (melhor UX)
+                    → Leitores de tela anunciam o label ao focar o campo
+                    → É obrigatório pelas diretrizes de acessibilidade (WCAG)
+              ──────────────────────────────────────────────── -->
+              <div class="mb-3">
+                <label for="ref-nome" class="form-label fw-bold">Nome</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="ref-nome"
+                  placeholder="Seu nome completo">
+              </div>
+
+              <!-- ── Campo de e-mail ─────────────────────────
+                type="email" → validação NATIVA do navegador:
+                  → Exige formato válido (algo@dominio.ext)
+                  → Mostra teclado com @ em mobile (iOS/Android)
+                  → Impede o envio do form se inválido (com required)
+                  → Não precisa de JavaScript para isso!
+
+                Outros type úteis:
+                  type="tel"    → teclado numérico em mobile
+                  type="number" → apenas números
+                  type="date"   → seletor de data nativo
+                  type="password" → esconde os caracteres
+              ──────────────────────────────────────────────── -->
+              <div class="mb-3">
+                <label for="ref-email" class="form-label fw-bold">E-mail</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="ref-email"
+                  placeholder="seu@email.com">
+              </div>
+
+              <!-- ── Select (lista suspensa) ────────────────
+                PROBLEMA: cada navegador renderiza o <select> diferente.
+                Chrome mostra de um jeito, Safari de outro, Firefox de outro.
+
+                SOLUÇÃO: form-select
+                  → Substitui a aparência nativa do <select>
+                  → Aplica seta customizada via background-image CSS
+                  → Visual consistente em todos os navegadores
+                  → Mesmos padding e border-radius do form-control
+
+                ESTRUTURA:
+                  <select class="form-select">
+                    <option value="">Placeholder (texto padrão)</option>
+                    <option value="1">Opção 1</option>
+                    <option value="2">Opção 2</option>
+                  </select>
+              ──────────────────────────────────────────────── -->
+              <div class="mb-3">
+                <label for="ref-servico" class="form-label fw-bold">Serviço</label>
+                <select class="form-select" id="ref-servico">
+                  <option value="">Selecione um serviço</option>
+                  <option>Landing Page</option>
+                  <option>Site Institucional</option>
+                  <option>E-commerce</option>
+                </select>
+              </div>
+
+              <!-- ── Textarea ───────────────────────────────
+                form-control funciona em <textarea> também.
+                rows="3" → define a altura inicial (linhas visíveis).
+                O usuário pode redimensionar manualmente pela alça
+                no canto inferior direito (comportamento padrão do navegador).
+                Para desativar: style="resize: none"
+              ──────────────────────────────────────────────── -->
+              <div class="mb-3">
+                <label for="ref-mensagem" class="form-label fw-bold">Mensagem</label>
+                <textarea
+                  class="form-control"
+                  id="ref-mensagem"
+                  rows="3"
+                  placeholder="Como podemos ajudar?">
+                </textarea>
+              </div>
+
+              <!-- ── Checkbox ───────────────────────────────
+                ESTRUTURA DE CHECKBOX/RADIO:
+                  <div class="form-check">          → container (flexbox)
+                    <input class="form-check-input"> → o checkbox/radio
+                    <label class="form-check-label"> → texto ao lado
+                  </div>
+
+                form-check: alinha ícone e label horizontalmente
+                form-check-input: estiliza o quadrado (checkbox):
+                  → Maior que o padrão do navegador
+                  → Cor de check = cor primária do Bootstrap
+                  → Border e background customizados
+                form-check-label: alinha verticalmente ao ícone
+              ──────────────────────────────────────────────── -->
+              <div class="mb-3 form-check">
+                <input
+                  type="checkbox"
+                  class="form-check-input"
+                  id="ref-aceito">
+                <label class="form-check-label" for="ref-aceito">
+                  Aceito os <a href="#">termos de uso</a>
+                </label>
+              </div>
+
+              <!-- Botão de submit com largura total -->
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-send me-2"></i>Enviar Mensagem
+              </button>
+
+            </form>
+          </div>
+        </section><!-- /secao-formularios -->
+
+
+        <!-- ╔══════════════════════════════════════════════════════╗
+             ║  SEÇÃO 8 — BOOTSTRAP ICONS                         ║
+             ╚══════════════════════════════════════════════════════╝
+
+          Bootstrap Icons é uma biblioteca de ícones SVG convertidos
+          em "icon font" (fonte de ícones) — similar ao Font Awesome.
+
+          O QUE É ICON FONT?
+            Os SVGs são encodados e incluídos numa fonte especial.
+            Você usa os ícones como se fossem letras/caracteres de texto.
+
+          VANTAGENS de icon font sobre imagens PNG/JPG:
+            ✅ Vetorial: escala perfeitamente em qualquer tamanho
+            ✅ Cor via CSS: mudam com text-* do Bootstrap
+            ✅ Tamanho via CSS: mudam com font-size / fs-*
+            ✅ Performance: um único arquivo carrega todos os ícones
+            ✅ Nenhuma requisição HTTP extra por ícone
+
+          SINTAXE DE USO:
+            <i class="bi bi-[nome-do-icone]"></i>
+
+            "bi"        → namespace Bootstrap Icons (identifica a biblioteca)
+            "bi-[nome]" → o ícone específico
+
+          ONDE ENCONTRAR OS NOMES:
+            icons.getbootstrap.com
+            Busque em inglês: "home", "cart", "envelope", "phone"...
+            Copie o nome e use em: class="bi bi-[nome]"
+        -->
+        <section id="secao-icones" class="secao-guia">
+          <h2>8. Bootstrap Icons</h2>
+          <p class="descricao">
+            Biblioteca oficial com mais de 2000 ícones SVG gratuitos.
+            Requer CDN separado. Use com classes Bootstrap para
+            controlar tamanho e cor sem CSS extra.
+          </p>
+
+          <!-- ── 8.1 Ícones comuns ───────────────────────── -->
+          <div class="label-subsecao">8.1 Ícones Comuns para Projetos Web</div>
+          <div class="demo-box">
+            <div class="row g-3 text-center">
+              <!-- Cada ícone: class="bi bi-[nome]" -->
+              <div class="col-3 col-md-2">
+                <i class="bi bi-house fs-2 text-primary d-block mb-1"></i>
+                <small class="text-muted">house</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-envelope fs-2 text-primary d-block mb-1"></i>
+                <small class="text-muted">envelope</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-telephone fs-2 text-primary d-block mb-1"></i>
+                <small class="text-muted">telephone</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-person fs-2 text-primary d-block mb-1"></i>
+                <small class="text-muted">person</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-gear fs-2 text-primary d-block mb-1"></i>
+                <small class="text-muted">gear</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-heart-fill fs-2 text-danger d-block mb-1"></i>
+                <small class="text-muted">heart-fill</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-star-fill fs-2 text-warning d-block mb-1"></i>
+                <small class="text-muted">star-fill</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-arrow-right fs-2 text-primary d-block mb-1"></i>
+                <small class="text-muted">arrow-right</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-whatsapp fs-2 text-success d-block mb-1"></i>
+                <small class="text-muted">whatsapp</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-instagram fs-2 text-danger d-block mb-1"></i>
+                <small class="text-muted">instagram</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-linkedin fs-2 text-primary d-block mb-1"></i>
+                <small class="text-muted">linkedin</small>
+              </div>
+              <div class="col-3 col-md-2">
+                <i class="bi bi-github fs-2 text-dark d-block mb-1"></i>
+                <small class="text-muted">github</small>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── 8.2 Tamanhos ───────────────────────────── -->
+          <div class="label-subsecao">8.2 Tamanhos via Classes fs-* (font-size)</div>
+          <div class="demo-box d-flex align-items-end gap-4">
+            <!--
+              Como ícones são texto (icon font), o tamanho é
+              controlado pela propriedade font-size.
+
+              Classes fs-* do Bootstrap:
+                fs-1 → font-size: 2.5rem  (maior)
+                fs-2 → font-size: 2rem
+                fs-3 → font-size: 1.75rem
+                fs-4 → font-size: 1.5rem
+                fs-5 → font-size: 1.25rem
+                fs-6 → font-size: 1rem    (menor / padrão do body)
+
+              Você também pode usar style="font-size: 3rem" para
+              tamanhos personalizados que não existem nas classes.
+            -->
+            <div class="text-center">
+              <i class="bi bi-house fs-1 text-primary d-block"></i>
+              <small class="text-muted">fs-1 (2.5rem)</small>
+            </div>
+            <div class="text-center">
+              <i class="bi bi-house fs-3 text-primary d-block"></i>
+              <small class="text-muted">fs-3 (1.75rem)</small>
+            </div>
+            <div class="text-center">
+              <i class="bi bi-house fs-5 text-primary d-block"></i>
+              <small class="text-muted">fs-5 (1.25rem)</small>
+            </div>
+            <div class="text-center">
+              <i class="bi bi-house text-primary d-block"></i>
+              <small class="text-muted">padrão (1rem)</small>
+            </div>
+          </div>
+
+          <!-- ── 8.3 Ícones em botões ───────────────────── -->
+          <div class="label-subsecao">8.3 Ícones em Botões</div>
+          <div class="demo-box d-flex flex-wrap gap-2">
+            <!--
+              Padrão para ícone ANTES do texto:
+                <i class="bi bi-icone me-2"></i>Texto
+                me-2 = margin-end: 0.5rem
+                       (espaço entre o ícone e o texto)
+
+              Padrão para ícone DEPOIS do texto:
+                Texto<i class="bi bi-icone ms-2"></i>
+                ms-2 = margin-start: 0.5rem
+            -->
+            <button class="btn btn-primary">
+              <i class="bi bi-send-fill me-2"></i>Enviar
+            </button>
+            <button class="btn btn-success">
+              <i class="bi bi-check-lg me-2"></i>Confirmar
+            </button>
+            <button class="btn btn-danger">
+              <i class="bi bi-trash me-2"></i>Excluir
+            </button>
+            <button class="btn btn-outline-primary">
+              <i class="bi bi-download me-2"></i>Baixar
+            </button>
+            <!--
+              Botão SOMENTE com ícone (sem texto visível):
+              Adicione title="" para tooltip no hover (acessibilidade visual)
+              Adicione aria-label="" para leitores de tela (acessibilidade)
+              px-3 = padding horizontal: 1rem (evita botão muito estreito)
+            -->
+            <button class="btn btn-primary px-3" title="Configurações" aria-label="Configurações">
+              <i class="bi bi-gear"></i>
+            </button>
+          </div>
+
+          <div class="nota">
+            Pesquise todos os ícones em
+            <a href="https://icons.getbootstrap.com" target="_blank" rel="noopener">
+              icons.getbootstrap.com
+            </a>
+            — busque em inglês: "home", "cart", "phone", "user", "star"...
+            Clique no ícone e copie o nome para usar em:
+            <code>class="bi bi-[nome]"</code>
+          </div>
+        </section><!-- /secao-icones -->
+
+
+        <!-- Rodapé do guia -->
+        <div class="text-center text-muted py-5 mt-4 border-top">
+          <p class="mb-1">
+            <strong>Bootstrap 5 — Guia de Referência · Aula 9</strong>
+          </p>
+          <p class="mb-0" style="font-size: 0.85rem;">
+            Bootstrap 5.3.3 + Bootstrap Icons 1.11.3 · placehold.co para imagens
+          </p>
+        </div>
+
+      </div><!-- /col-lg-9 -->
+    </div><!-- /row -->
+  </div><!-- /container py-5 -->
+</div><!-- /row (externo) -->
+</div><!-- /container (externo) -->
+
+
+  
+  <div class="modal fade" id="modalSimples" tabindex="-1"
+       aria-labelledby="modalSimplesLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <!-- Cabeçalho do modal -->
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="modalSimplesLabel">
+            <i class="bi bi-info-circle me-2"></i>Modal Simples
+          </h5>
+          <!--
+            btn-close: botão X estilizado (sem texto, apenas o ícone X)
+            btn-close-white: versão branca do X para fundos escuros
+              → Sem essa classe, o X seria preto (invisível no bg-primary)
+
+            data-bs-dismiss="modal":
+              → Instrui o JS do Bootstrap a fechar ESTE modal ao clicar
+              → Mesma lógica do data-bs-dismiss="alert" nos alerts!
+
+            aria-label="Fechar":
+              → Botões sem texto precisam de aria-label para acessibilidade
+              → Leitores de tela vão anunciar "Fechar" ao focar o botão
+          -->
+          <button
+            type="button"
+            class="btn-close btn-close-white"
+            data-bs-dismiss="modal"
+            aria-label="Fechar">
+          </button>
+        </div>
+
+        <!-- Corpo do modal — conteúdo principal -->
+        <div class="modal-body">
+          <p>Esse é um modal simples. Ele aparece sobre o conteúdo e bloqueia o scroll da página.</p>
+          <p class="mb-0">
+            Clique fora, pressione <kbd>Esc</kbd> ou clique no X para fechar —
+            o Bootstrap cuida de tudo isso automaticamente via JavaScript.
+          </p>
+        </div>
+
+        <!-- Rodapé do modal — botões de ação -->
+        <div class="modal-footer">
+          <!--
+            data-bs-dismiss="modal" no botão Cancelar/Fechar:
+            Fecha o modal e volta para a página sem fazer nenhuma ação.
+          -->
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Fechar
+          </button>
+          <button type="button" class="btn btn-primary">
+            Confirmar
+          </button>
+        </div>
+
+      </div><!-- /modal-content -->
+    </div><!-- /modal-dialog -->
+  </div><!-- /modal#modalSimples -->
+
+
+  <!--
+  ═══════════════════════════════════════════════════════════════
+  MODAL COM FORMULÁRIO
+  ───────────────────────────────────────────────────────────────
+  Caso de uso mais comum: formulário de contato em modal.
+  O usuário clica em "Fale Conosco" → o modal abre com o form.
+
+  Vantagem: o formulário não ocupa espaço fixo na página.
+  Aparece sob demanda e desaparece ao fechar, deixando a página limpa.
+
+  ATENÇÃO com IDs dos campos:
+    Se você tiver um formulário na página E um no modal,
+    os IDs dos campos não podem ser iguais — IDs são únicos no HTML.
+    Por isso os campos do modal usam "mNome", "mEmail" etc.
+    em vez de "ref-nome", "ref-email" da seção 7.
+  ═══════════════════════════════════════════════════════════════
+  -->
+  <div class="modal fade" id="modalFormulario" tabindex="-1"
+       aria-labelledby="modalFormularioLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header bg-primary text-white">
+          <h5 class="modal-title" id="modalFormularioLabel">
+            <i class="bi bi-envelope me-2"></i>Fale Conosco
+          </h5>
+          <button type="button" class="btn-close btn-close-white"
+                  data-bs-dismiss="modal" aria-label="Fechar"></button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Formulário dentro do modal — mesmos padrões da Seção 7 -->
+          <form>
+            <div class="mb-3">
+              <label for="mNome" class="form-label fw-bold">Nome</label>
+              <input type="text" class="form-control" id="mNome"
+                     placeholder="Seu nome completo">
+            </div>
+            <div class="mb-3">
+              <label for="mEmail" class="form-label fw-bold">E-mail</label>
+              <input type="email" class="form-control" id="mEmail"
+                     placeholder="seu@email.com">
+            </div>
+            <div class="mb-3">
+              <label for="mServico" class="form-label fw-bold">Serviço</label>
+              <select class="form-select" id="mServico">
+                <option value="">Selecione um serviço</option>
+                <option>Landing Page</option>
+                <option>Site Institucional</option>
+                <option>E-commerce</option>
+              </select>
+            </div>
+            <div class="mb-0">
+              <label for="mMensagem" class="form-label fw-bold">Mensagem</label>
+              <textarea class="form-control" id="mMensagem"
+                        rows="4" placeholder="Como podemos ajudar?"></textarea>
+            </div>
+          </form>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Cancelar
+          </button>
+          <button type="button" class="btn btn-primary">
+            <i class="bi bi-send me-2"></i>Enviar
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div><!-- /modal#modalFormulario -->
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
