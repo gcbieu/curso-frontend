@@ -1,0 +1,129 @@
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InovaBank</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+
+<body>
+  <h1>InovaBank</h1>
+
+  <div class="container">
+
+    <!-- ── Card de Saldo ──────────────────────────────────── -->
+    <div class="card">
+      <h2>Saldo disponível</h2>
+            <button id="btn-olho" onclick="toggleSaldo()">
+        <i id="icone-olho" class="fi fi-rr-eye"></i>
+      </button>
+
+
+      <p class="info-conta">
+        Conta: <strong id="numero-conta">0043</strong> —
+        <strong id="titular">Gabriel Oliveira</strong> &nbsp;
+                <!--
+          id="status-conta" → vamos alternar as classes
+          .status-ativa e .status-bloqueada via classList
+          quando bloquearConta() for chamada.
+        -->
+
+        <span id="status-conta" class="status-ativa">Ativa</span>
+      <!--
+        DOM — LEITURA E ESCRITA DE TEXTO
+        ─────────────────────────────────
+        id="saldo" → vamos selecionar com querySelector('#saldo')
+        e atualizar com .textContent toda vez que o saldo mudar.
+        É o equivalente visual do console.log do saldo.
+      -->
+      <div id="saldo">R$ 10000.00</div>
+      </p>
+    </div>
+
+    <!-- ── Card de Operações ──────────────────────────────── -->
+    <div class="card">
+      <h2>Operações</h2>
+      <!--
+        DOM — LENDO VALOR DE INPUT
+        ───────────────────────────
+        id="campo-valor" → dentro dos eventos de clique,
+        vamos ler o valor digitado com:
+          const valor = Number(document.querySelector('#campo-valor').value)
+        Equivale ao parâmetro que antes passávamos direto: depositar(500)
+      -->
+      <input type="number" id="campo-valor" placeholder="Digite o valor (ex: 200.00)" min="0" step="0.01">
+
+      <div class="botoes">
+        <!--
+          DOM — EVENTOS DE CLIQUE
+          ────────────────────────
+          Esses botões vão receber addEventListener('click', ...)
+          que chama depositar() e sacar() com o valor do input.
+          No banco.js original chamávamos direto: depositar(500)
+          Agora o valor vem do campo digitado pelo usuário.
+        -->
+        <button id="btn-depositar">⬆ Depositar</button>
+        <button id="btn-sacar">⬇ Sacar</button>
+      </div>
+
+      <!--
+        DOM — EXIBINDO FEEDBACK NA TELA
+        ────────────────────────────────
+        id="mensagem" → substitui os console.log de sucesso e erro.
+        Vamos mostrar/esconder esse elemento e trocar seu texto
+        e classe (msg-sucesso / msg-erro) conforme o resultado.
+      -->
+      <div id="mensagem"></div>
+
+      <button id="btn-bloquear">🔒 Bloquear conta</button>
+    </div>
+
+    <!-- ── Card de Histórico ──────────────────────────────── -->
+    <div class="card">
+      <h2>Últimas transações</h2>
+      <!--
+        DOM — CRIANDO ELEMENTOS DINAMICAMENTE
+        ───────────────────────────────────────
+        id="lista-historico" → cada vez que historico.push() for chamado
+        no banco.js, também vamos criar um <li> com createElement
+        e adicioná-lo aqui com appendChild ou insertBefore.
+        Equivale ao console.log do histórico.
+      -->
+      <ul id="lista-historico">
+        <li class="historico-vazio">Nenhuma transação ainda.</li>
+      </ul>
+    </div>
+
+    <!-- ── Card de Resumo ─────────────────────────────────── -->
+    <div class="card">
+      <h2>Resumo</h2>
+      <!--
+        DOM — ATUALIZANDO MÚLTIPLOS ELEMENTOS
+        ───────────────────────────────────────
+        Cada contador do verResumo() tem um elemento correspondente.
+        Em vez de console.log, vamos atualizar o textContent de cada um.
+      -->
+      <div class="resumo-grid">
+        <div class="resumo-item">
+          <span id="total-depositos">0</span>
+          <span>Depósitos</span>
+        </div>
+        <div class="resumo-item">
+          <span id="total-saques">0</span>
+          <span>Saques</span>
+        </div>
+        <div class="resumo-item">
+          <span id="total-transacoes">0</span>
+          <span>Total</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="banco.js"></script>
+
+</body>
+
+</html>

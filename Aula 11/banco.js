@@ -1,87 +1,113 @@
-const numeroConta = '001'
-let titular = "Gabriel Oliveira"
-let saldo = 1000
-let contaAtiva = true
-let statusConta
+const numeroConta = '001';
+let titular = "Gabriel Oliveira";
+let saldo = 1000;
+let contaAtiva = true;
+let statusConta;
 const historico = [];
+let activeSession = true;
 
-console.log("══════════════════════════════════") 
-console.log("        EXTRATO DA CONTA  ")
-console.log("══════════════════════════════════")
+// Seletores
+const elSaldo = document.querySelector('#saldo');
+const elMensagem = document.querySelector('#mensagem');
+const btnDepositar = document.querySelector('#btn-depositar');
+const btnSacar = document.querySelector('#btn-sacar');
+const btnBloquear = document.querySelector('#btn-bloquear');
+const elTotalDepositos = document.querySelector('#total-depositos');
+const elTotalSaques = document.querySelector('#total-saques');
+const elTotalTransacoes = document.querySelector('#total-transacoes');
+const iconeOlho = document.querySelector('#icone-olho');
+let saldoEscondido = false;
 
-function verExtrato(){
-    if(contaAtiva){
-        statusConta = "Ativa"
-    } else {
-        statusConta = "Inativa"
-    }
+// --- Eventos ---
+btnDepositar.addEventListener('click', () => {
+    const campValor = document.querySelector('#campo-valor');
+    depositar(Number(campValor.value));
+});
 
+btnSacar.addEventListener('click', () => {
+    const campValor = document.querySelector('#campo-valor');
+    sacar(Number(campValor.value));
+});
 
-console.log(`Conta: ${numeroConta}`)
-console.log(`Titular: ${titular}`)
-console.log(`Saldo: R$ ${saldo.toFixed(2)}`)
+btnBloquear.addEventListener('click', bloquearConta);
 
-console.log("──────────────────────────────────")}
+// --- Funções ---
 
-function depositar(valor){
-    if(valor > 0){
-        saldo = saldo + valor
-        historico.push(`depósito: R$ ${valor} | Saldo: R$ ${saldo}`)
-        //console.log( `Depósito de R$ ${valor.toFixed(2)} | Saldo: R$ ${saldo.toFixed(2)}`);
-        for(let i = 1; i < historico.length; i++){
-            console.log(`${i}. ${historico[i]}`);
+function toggleSaldo() {
+    if (!saldoEscondido) {
+        elSaldo.textContent = "••••••";
+        if(iconeOlho) {
+            iconeOlho.classList.replace('fi-rr-eye', 'fi-rr-eye-crossed');
         }
+        saldoEscondido = true;
     } else {
-        console.log("\nValor inválido para depósito!");
+        atualizarSaldo();
+        if(iconeOlho) {
+            iconeOlho.classList.replace('fi-rr-eye-crossed', 'fi-rr-eye');
+        }
+        saldoEscondido = false;
     }
 }
 
-function sacar(valor){
-    if(valor > 0 && valor <= saldo && contaAtiva){
-        saldo = saldo - valor
-        historico.push(`Saque de R$ ${valor} | Saldo: R$ ${saldo}`)
-    } else {
-    console.log("\nValor inválido para saque ou conta inativa!");
+function atualizarSaldo() {
+    if (!saldoEscondido) {
+        elSaldo.textContent = `R$ ${saldo.toFixed(2)}`;
+    }
 }
+
+function depositar(valor) {
+    if (!contaAtiva) {
+        exibirMensagem('Conta bloqueada. Não é possível realizar depósito.', 'erro');
+        return;
+    }
+    if (valor > 0) {
+        saldo += valor;
+        historico.push(`Depósito: R$ ${valor.toFixed(2)}`);
+        atualizarSaldo();
+        exibirMensagem(`Depósito de R$ ${valor.toFixed(2)} realizado!`, 'sucesso');
+    }
+}
+
+function sacar(valor) {
+    if (!contaAtiva || valor > saldo) {
+        exibirMensagem('Saldo insuficiente ou conta inativa!', 'erro');
+        return;
+    }
+    if (valor > 0) {
+        saldo -= valor;
+        historico.push(`Saque: R$ ${valor.toFixed(2)}`);
+        atualizarSaldo();
+        exibirMensagem(`Saque de R$ ${valor.toFixed(2)} realizado!`, 'sucesso');
+    }
+}
+
+function exibirMensagem(texto, tipo) {
+    elMensagem.textContent = texto;
+    elMensagem.style.display = 'block';
+    elMensagem.className = tipo === 'sucesso' ? 'msg-sucesso' : 'msg-erro';
+}
+
+function bloquearConta() {
+    contaAtiva = !contaAtiva;
+    btnBloquear.textContent = contaAtiva ? '🔒 Bloquear conta' : '🔓 Desbloquear conta';
+    exibirMensagem(contaAtiva ? "Conta desbloqueada!" : "Conta bloqueada!", 'sucesso');
 }
 
 function verResumo(){
-    let nDepositos = 0 
-    let nSaques = 0 
-    let qtdTransacoes = 0 
+    let totalDepositos = 0
+    let TotalSaques = 0
+    let TotalTransacoes = 0
 
-    for (let i = 0; i <historico.length; i++){
-        if(historico[i].includes("Depósitos")){
-            nDepositos++
-        } else {
-            nSaques++
+    for (const transacao of historico){
+        if (transacao.include('Depósitos')){
+            totalDepositos++;
+        } else if (transacao.include('Saque')){
+            TotalSaques++
         }
-        qtdTransacoes++
+        TotalTransacoes++
     }
 
-    console.log("\nRESUMO DA CONTA")
-    console.log("──────────────────────────────────")
-    console.log(`Depósitos realizados: ${nDepositos}`)
-    console.log(`Saques realizados: ${nSaques}`)
-    console.log(`Transações totais: ${qtdTransacoes}`)
-
+    elTotalDepositos.textContent = totalDepositos
+    elTotalSaques.textContent = TotalSaques
+    elTotalTransacoes.textContent = elTotalTransacoes
 }
-
-verExtrato()
-depositar(500)
-sacar(200)
-depositar(300)
-sacar(100)
-depositar(200)
-sacar(9999)
-console.log(historico);
-console.log(historico.length);
-console.log(historico[0]);
-
-console.log("──────────────────────────────────")
-console.log(`Saldo atual: R$ ${saldo.toFixed(2)}`)
-console.log("══════════════════════════════════\n");
-
-verResumo()
-
-
