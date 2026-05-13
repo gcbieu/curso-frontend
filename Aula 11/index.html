@@ -10,11 +10,18 @@
 <body>
   <h1>InovaBank</h1>
 
+  <div class="perfil">
+      <button id="btn-perfil-gabriel">Gabriel Oliveira</button>
+      <button id="btn-perfil-joao">João (TESTE)</button>
+  </div>
+
+
   <div class="container">
 
     <!-- ── Card de Saldo ──────────────────────────────────── -->
     <div class="card">
       <h2>Saldo disponível</h2>
+
             <button id="btn-olho" onclick="toggleSaldo()">
         <i id="icone-olho" class="fi fi-rr-eye"></i>
       </button>
@@ -37,7 +44,7 @@
         e atualizar com .textContent toda vez que o saldo mudar.
         É o equivalente visual do console.log do saldo.
       -->
-      <div id="saldo">R$ 10000.00</div>
+      <div id="saldo">R$ 50000.00</div>
       </p>
     </div>
 
@@ -81,7 +88,7 @@
 
     <!-- ── Card de Histórico ──────────────────────────────── -->
     <div class="card">
-      <h2>Últimas transações</h2>
+      <h2>Transações</h2>
       <!--
         DOM — CRIANDO ELEMENTOS DINAMICAMENTE
         ───────────────────────────────────────
@@ -93,6 +100,7 @@
       <ul id="lista-historico">
         <li class="historico-vazio">Nenhuma transação ainda.</li>
       </ul>
+
     </div>
 
     <!-- ── Card de Resumo ─────────────────────────────────── -->
@@ -120,7 +128,10 @@
       </div>
     </div>
 
+    <button id="btnlimpar">Limpar Histórico</button>
   </div>
+  </div>
+
 
   <script src="banco.js"></script>
 

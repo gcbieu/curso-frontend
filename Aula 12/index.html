@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>EXEMPLO_LISTA</ul>
+        <script>
+            const paragrafo = document.createElement('p')
+            paragrafo.textContent = 'Este é um parafrafo criado dinamicamente.'
+            paragrafo.style.color = 'blue'
+            document.body.appendChild(paragrafo)
+
+            const item =document.createElement('li')
+            item.textContent = 'Este é um item de lista criado dinamicamente.'
+            document.getElementById('EXEMPLO_LISTA').appendChild(item)
+        </script>
+</body>
+</html>
