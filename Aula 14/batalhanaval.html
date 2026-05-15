@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batalha Naval — InovaGames</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+  >
+
+  <!-- Bootstrap Icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+  >
+
+  <!-- CSS customizado -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ── Cabecalho ──────────────────────────────────────────── -->
+  <header class="cabecalho text-center py-4">
+    <h1 class="titulo-jogo mb-0">
+      <i class="bi bi-crosshair me-2"></i>Batalha Naval
+    </h1>
+    <p class="subtitulo mb-0">InovaGames</p>
+  </header>
+
+  <!-- ── Conteudo principal ─────────────────────────────────── -->
+  <main class="container py-4">
+    <div class="row justify-content-center g-4">
+
+      <!-- Painel do jogo -->
+      <div class="col-12 col-lg-7">
+        <div class="card-jogo p-4">
+
+          <!-- Mensagem de status -->
+          <div
+            id="mensagem"
+            class="mensagem text-center mb-3"
+          >
+            Clique em uma celula para atirar.
+          </div>
+
+          <!-- Tabuleiro -->
+          <!--
+            O JS vai preencher este elemento com os <div>
+            de cada celula do tabuleiro 5x5.
+            Nao adicione nada aqui manualmente.
+          -->
+          <div id="tabuleiro" class="tabuleiro mx-auto mb-4"></div>
+
+          <!-- Rodape do tabuleiro -->
+          <div class="d-flex justify-content-between align-items-center">
+            <span id="tentativas" class="tentativas">
+              Tentativas: 0
+            </span>
+            <button id="btn-reiniciar" class="btn btn-reiniciar">
+              <i class="bi bi-arrow-counterclockwise me-2"></i>Reiniciar
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Painel lateral — instrucoes -->
+      <div class="col-12 col-lg-4">
+        <div class="card-instrucoes p-4">
+          <h2 class="instrucoes-titulo mb-3">Como jogar</h2>
+          <ul class="instrucoes-lista">
+            <li>
+              <i class="bi bi-water me-2 text-info"></i>
+              O computador escondeu <strong>3 navios</strong>
+              no tabuleiro
+            </li>
+            <li>
+              <i class="bi bi-cursor me-2 text-warning"></i>
+              Clique nas celulas para atirar
+            </li>
+            <li>
+              <i class="bi bi-bullseye me-2 acerto-icon"></i>
+              Celula vermelha = acerto
+            </li>
+            <li>
+              <i class="bi bi-circle me-2 text-secondary"></i>
+              Celula cinza = agua
+            </li>
+            <li>
+              <i class="bi bi-trophy me-2 text-warning"></i>
+              Afunde os 3 navios para vencer!
+            </li>
+          </ul>
+
+          <hr class="my-3">
+
+          <div class="legenda">
+            <h3 class="legenda-titulo mb-2">Legenda</h3>
+            <div class="d-flex flex-column gap-2">
+              <div class="d-flex align-items-center gap-2">
+                <div class="celula-exemplo celula-neutra"></div>
+                <span>Agua (nao atingida)</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <div class="celula-exemplo acerto"></div>
+                <span>Acerto</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <div class="celula-exemplo erro"></div>
+                <span>Agua atingida</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Bootstrap JS bundle -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  </script>
+
+  <!-- Logica do jogo -->
+  <script src="script.js"></script>
+
+</body>
+</html>

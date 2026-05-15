@@ -33,8 +33,7 @@
     gap: 16px;
   }
   
-  /* Alterando o card principal para o estilo do topo da imagem */
-.card:first-of-type {
+  .card:first-of-type {
   background:#D4FF2A;
   color: black;
   border-radius: 24px;

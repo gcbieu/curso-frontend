@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InovaBank | Digital Banking</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Ícones -->
+    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- TELA DE LOADING (OVERLAY) -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <h1 class="logo-loading">Inova<span>Bank</span></h1>
+            <div class="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            <p id="loading-text">Carregando...</p>
+            
+            <!-- Seleção inicial para liberar o app -->
+            <div id="initial-setup" class="hidden">
+                <p>Selecione seu perfil para acessar:</p>
+                <select id="select-inicial">
+                    <option value="" disabled selected>Escolher usuário...</option>
+                    <!-- Opções inseridas via JS -->
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL DO APP -->
+    <div id="app-content" class="hidden">
+        <header class="main-header">
+            <div class="header-left">
+                <span class="brand">Inova<span>Bank</span></span>
+            </div>
+            
+            <div class="header-right">
+                <div class="user-info">
+                    <div class="avatar-circle">
+                        <i id="user-icon" class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <select id="header-user-select">
+                            <!-- Opções inseridas via JS -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Card de Saldo -->
+            <div class="card card-balance">
+                <div class="card-header">
+                    <h2>Saldo disponível</h2>
+                    <button id="btn-olho" onclick="toggleSaldo()">
+                        <i id="icone-olho" class="fi fi-rr-eye"></i>
+                    </button>
+                </div>
+                
+                <div class="balance-amount">
+                    <span id="saldo">R$ 0,00</span>
+                </div>
+
+                <div class="account-info">
+                    <span>Conta: <strong id="numero-conta">000</strong></span>
+                    <span>Titular: <strong id="titular">---</strong></span>
+                    <span id="status-conta" class="status-badge status-ativa">Ativa</span>
+                </div>
+            </div>
+
+            <!-- Card de Ações -->
+            <div class="card">
+                <h2>Operações</h2>
+                <div class="input-group">
+                    <label for="campo-valor">Valor (R$)</label>
+                    <input type="number" id="campo-valor" placeholder="0,00" step="0.01">
+                </div>
+                
+                <div class="actions-grid">
+                    <button id="btn-depositar" class="btn-action">Depositar</button>
+                    <button id="btn-sacar" class="btn-action">Sacar</button>
+                    <button id="btn-bloquear" class="btn-outline">Bloquear Conta</button>
+                </div>
+                <div id="mensagem"></div>
+            </div>
+
+            <!-- Card de Histórico -->
+            <div class="card">
+                <h2>Transações Recentes</h2>
+                <ul id="lista-historico">
+                    <li class="historico-vazio">Nenhuma transação ainda.</li>
+                </ul>
+            </div>
+
+            <!-- Card de Resumo -->
+            <div class="card card-summary">
+                <h2>Resumo</h2>
+                <div class="resumo-grid">
+                    <div class="resumo-item">
+                        <span id="total-depositos" class="val">0</span>
+                        <span class="lab">Depósitos</span>
+                    </div>
+                    <div class="resumo-item">
+                        <span id="total-saques" class="val">0</span>
+                        <span class="lab">Saques</span>
+                    </div>
+                    <div class="resumo-item">
+                        <span id="total-transacoes" class="val">0</span>
+                        <span class="lab">Total</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="banco.js"></script>
+</body>
+</html>
